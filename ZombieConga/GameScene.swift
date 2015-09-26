@@ -69,7 +69,7 @@ class GameScene: SKScene {
 
     moveSprite(zombie, velocity: velocity)
     boundsCheckZombie()
-    
+    rotateSprite(zombie, direction: velocity)
   }
   
   // User Functions
@@ -125,5 +125,8 @@ class GameScene: SKScene {
     shape.strokeColor = SKColor.redColor()
     shape.lineWidth = 12.0
     addChild(shape)
+  }
+  func rotateSprite(sprite: SKSpriteNode, direction: CGPoint) {
+    sprite.zRotation = CGFloat(atan2(Double(direction.y), Double(direction.x)))
   }
 }
