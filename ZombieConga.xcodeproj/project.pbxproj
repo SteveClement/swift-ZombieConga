@@ -19,6 +19,7 @@
 		AAE30CAB1BB5B1C900215941 /* YouWin.png in Resources */ = {isa = PBXBuildFile; fileRef = AAE30CA61BB5B1C900215941 /* YouWin.png */; };
 		AAE30CAD1BB5B1F000215941 /* sprites.atlas in Resources */ = {isa = PBXBuildFile; fileRef = AAE30CAC1BB5B1F000215941 /* sprites.atlas */; };
 		AAE30CAF1BB5B2EC00215941 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AAE30CAE1BB5B2EC00215941 /* Assets.xcassets */; };
+		AAE30CB11BB6F94900215941 /* MyUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE30CB01BB6F94900215941 /* MyUtils.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		AAE30CA61BB5B1C900215941 /* YouWin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = YouWin.png; sourceTree = "<group>"; };
 		AAE30CAC1BB5B1F000215941 /* sprites.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; name = sprites.atlas; path = Images/sprites.atlas; sourceTree = "<group>"; };
 		AAE30CAE1BB5B2EC00215941 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		AAE30CB01BB6F94900215941 /* MyUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyUtils.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +79,7 @@
 				AAE30C981BB47CB000215941 /* LaunchScreen.storyboard */,
 				AAE30C9B1BB47CB000215941 /* Info.plist */,
 				AAE30CAE1BB5B2EC00215941 /* Assets.xcassets */,
+				AAE30CB01BB6F94900215941 /* MyUtils.swift */,
 			);
 			path = ZombieConga;
 			sourceTree = "<group>";
@@ -172,6 +175,7 @@
 				AAE30C901BB47CB000215941 /* GameScene.swift in Sources */,
 				AAE30C921BB47CB000215941 /* GameViewController.swift in Sources */,
 				AAE30C8C1BB47CB000215941 /* AppDelegate.swift in Sources */,
+				AAE30CB11BB6F94900215941 /* MyUtils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
