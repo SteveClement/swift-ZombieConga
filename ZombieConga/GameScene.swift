@@ -16,9 +16,11 @@ class GameScene: SKScene {
   var dt: NSTimeInterval = 0
   let zombieMovePointPerSec: CGFloat = 480.0
   var velocity = CGPointZero
-  let debug = false
   let playableRect: CGRect
-  
+
+  let debug = true
+
+
   // Overrides
   override init(size: CGSize) {
     let maxAspectRatio:CGFloat = 16.0/9.0
@@ -44,6 +46,7 @@ class GameScene: SKScene {
     //zombie.setScale(2.0)
     addChild(background)
     addChild(zombie)
+    debugDrawPlayableArea()
   }
   override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
     let touch = touches.first as UITouch!
@@ -86,9 +89,9 @@ class GameScene: SKScene {
     moveZombieToward(touchLocation)
   }
   func boundsCheckZombie() {
-    let bottomLeft = CGPointZero
-    let topRight = CGPoint(x: size.width, y: size.height)
-    
+    let bottomLeft = CGPoint(x: 0, y: CGRectGetMinY(playableRect))
+    let topRight = CGPoint(x: size.width, y: CGRectGetMaxY(playableRect))
+
     if zombie.position.x <= bottomLeft.x {
       zombie.position.x = bottomLeft.x
       velocity.x = -velocity.x
@@ -110,5 +113,17 @@ class GameScene: SKScene {
     if debug {
       print("\(content)")
     }
+  }
+  func debugDrawPlayableArea() {
+    if !debug {
+      return
+    }
+    let shape = SKShapeNode()
+    let path = CGPathCreateMutable()
+    CGPathAddRect(path, nil, playableRect)
+    shape.path = path
+    shape.strokeColor = SKColor.redColor()
+    shape.lineWidth = 12.0
+    addChild(shape)
   }
 }
