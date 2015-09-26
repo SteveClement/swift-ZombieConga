@@ -75,11 +75,11 @@
 				AAE30C8B1BB47CB000215941 /* AppDelegate.swift */,
 				AAE30C8F1BB47CB000215941 /* GameScene.swift */,
 				AAE30C911BB47CB000215941 /* GameViewController.swift */,
+				AAE30CB01BB6F94900215941 /* MyUtils.swift */,
 				AAE30C931BB47CB000215941 /* Main.storyboard */,
 				AAE30C981BB47CB000215941 /* LaunchScreen.storyboard */,
 				AAE30C9B1BB47CB000215941 /* Info.plist */,
 				AAE30CAE1BB5B2EC00215941 /* Assets.xcassets */,
-				AAE30CB01BB6F94900215941 /* MyUtils.swift */,
 			);
 			path = ZombieConga;
 			sourceTree = "<group>";
