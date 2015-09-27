@@ -17,8 +17,10 @@ class GameScene: SKScene {
   let zombieMovePointPerSec: CGFloat = 480.0
   var velocity = CGPointZero
   let playableRect: CGRect
+  var lastTouchLocation: CGPoint?
+  let zombieRotateRadiansPerSec:CGFloat = 4.0 * π
 
-  let debug = true
+  let debug = false
 
 
   // Overrides
@@ -67,9 +69,18 @@ class GameScene: SKScene {
     lastUpdateTime = currentTime
     println("\(dt*1000) ms since last update")
 
-    moveSprite(zombie, velocity: velocity)
+    if let lastTouch = lastTouchLocation {
+      let diff = lastTouch - zombie.position
+      if (diff.length() <= zombieMovePointPerSec * CGFloat(dt)) {
+        zombie.position = lastTouchLocation!
+        velocity = CGPointZero
+      } else {
+        moveSprite(zombie, velocity: velocity)
+        rotateSprite(zombie, direction: velocity, rotateRadiansPerSec: zombieRotateRadiansPerSec)
+      }
+    }
+
     boundsCheckZombie()
-    rotateSprite(zombie, direction: velocity)
   }
   
   // User Functions
@@ -84,6 +95,7 @@ class GameScene: SKScene {
     velocity = direction * zombieMovePointPerSec
   }
   func sceneTouched(touchLocation: CGPoint) {
+    lastTouchLocation = touchLocation
     moveZombieToward(touchLocation)
   }
   func boundsCheckZombie() {
@@ -107,6 +119,17 @@ class GameScene: SKScene {
       velocity.y = -velocity.y
     }
   }
+  func rotateSprite(sprite: SKSpriteNode, direction: CGPoint, rotateRadiansPerSec: CGFloat) {
+    let shortest = shortestAngleBetween(sprite.zRotation, angle2: velocity.angle)
+    let amountToRotate = min(rotateRadiansPerSec * CGFloat(dt), abs(shortest))
+    sprite.zRotation += shortest.sign() * amountToRotate
+
+  }
+  func distanceCheckZombie(lastTouchLocation: CGPoint, touchLocation: CGPoint) {
+    print("Last: \(lastTouchLocation) \nCurrent: \(touchLocation)")
+  }
+
+  // Debug helpers
   func println(content: NSString) {
     if debug {
       print("\(content)")
@@ -123,8 +146,5 @@ class GameScene: SKScene {
     shape.strokeColor = SKColor.redColor()
     shape.lineWidth = 12.0
     addChild(shape)
-  }
-  func rotateSprite(sprite: SKSpriteNode, direction: CGPoint) {
-    sprite.zRotation = direction.angle
   }
 }
