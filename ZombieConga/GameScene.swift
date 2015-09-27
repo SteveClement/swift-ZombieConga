@@ -78,12 +78,10 @@ class GameScene: SKScene {
     println("Amount to move: \(amountToMove)")
     sprite.position += amountToMove
   }
-  
   func moveZombieToward(location: CGPoint) {
-    let offset = CGPoint(x: location.x - zombie.position.x, y: location.y - zombie.position.y)
-    let length = sqrt(pow(offset.x, 2) + pow(offset.y, 2))
-    let direction = CGPoint(x: offset.x / CGFloat(length), y: offset.y / CGFloat(length))
-    velocity = CGPoint(x: direction.x * zombieMovePointPerSec, y: direction.y * zombieMovePointPerSec)
+    let offset = location - zombie.position
+    let direction = offset.normalized()
+    velocity = direction * zombieMovePointPerSec
   }
   func sceneTouched(touchLocation: CGPoint) {
     moveZombieToward(touchLocation)

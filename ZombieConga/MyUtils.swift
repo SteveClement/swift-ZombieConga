@@ -12,16 +12,20 @@ import CoreGraphics
 // The following will extent the basic operations, +-*/ to be able to calculate vectors etc.
 // Before implementing this you would get an error because the (run-time) compiler wouldn't
 // know how to handle CGPoints for example. Now it has a reference on what to do
+
+// Add CGPoint operations to the +_operator
 func + (left: CGPoint, right: CGPoint) -> CGPoint {
   return CGPoint(x: left.x + right.x, y: left.y + right.y)
 }
+// Add CGPoint operations to the +=_operator
 func += (inout left: CGPoint, right: CGPoint) {
   left = left + right
 }
-
+// Add CGPoint operations to the -_operator
 func - (left: CGPoint, right: CGPoint) -> CGPoint {
-  return CGPoint(x: left.x - right.x, y: left.y - left.x)
+  return CGPoint(x: left.x - right.x, y: left.y - right.y)
 }
+// Add CGPoint operations to the +_operator
 func -= (inout left: CGPoint, right: CGPoint) {
   left = left - right
 }
