@@ -127,6 +127,6 @@ class GameScene: SKScene {
     addChild(shape)
   }
   func rotateSprite(sprite: SKSpriteNode, direction: CGPoint) {
-    sprite.zRotation = CGFloat(atan2(Double(direction.y), Double(direction.x)))
+    sprite.zRotation = direction.angle
   }
 }
