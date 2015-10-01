@@ -83,7 +83,7 @@ class GameScene: SKScene {
 
     boundsCheckZombie()
   }
-  
+
   // User Functions
   func moveSprite(sprite: SKSpriteNode, velocity: CGPoint) {
     let amountToMove = velocity * CGFloat(dt)
