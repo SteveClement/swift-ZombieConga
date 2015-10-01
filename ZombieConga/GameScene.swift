@@ -20,7 +20,7 @@ class GameScene: SKScene {
   var lastTouchLocation: CGPoint?
   let zombieRotateRadiansPerSec:CGFloat = 4.0 * π
 
-  let debug = false
+  let debug = true
 
 
   // Overrides
@@ -48,6 +48,7 @@ class GameScene: SKScene {
     //zombie.setScale(2.0)
     addChild(background)
     addChild(zombie)
+    spawnEnemy()
     debugDrawPlayableArea()
   }
   override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -128,6 +129,20 @@ class GameScene: SKScene {
   func distanceCheckZombie(lastTouchLocation: CGPoint, touchLocation: CGPoint) {
     print("Last: \(lastTouchLocation) \nCurrent: \(touchLocation)")
   }
+  func spawnEnemy() {
+    let enemy = SKSpriteNode(imageNamed: "enemy")
+    enemy.position = CGPoint(x: size.width + enemy.size.width/2, y: size.height/2)
+    addChild(enemy)
+    let actionMidMove = SKAction.moveTo(CGPoint(x: size.width/2, y:CGRectGetMinY(playableRect) + enemy.size.height/2), duration: 1.0)
+    let actionMove = SKAction.moveTo(CGPoint(x: -enemy.size.width/2, y:enemy.position.y), duration: 1.0)
+    let wait = SKAction.waitForDuration(0.25)
+    let logMessage = SKAction.runBlock() {
+      self.println("Reached bottom!")
+    }
+    let sequence = SKAction.sequence([actionMidMove, logMessage, wait, actionMove])
+
+    enemy.runAction(sequence)
+  }
 
   // Debug helpers
   func println(content: NSString) {
@@ -139,6 +154,7 @@ class GameScene: SKScene {
     if !debug {
       return
     }
+    print("\(size)")
     let shape = SKShapeNode()
     let path = CGPathCreateMutable()
     CGPathAddRect(path, nil, playableRect)
