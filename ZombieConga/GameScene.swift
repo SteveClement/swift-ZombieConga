@@ -133,13 +133,17 @@ class GameScene: SKScene {
     let enemy = SKSpriteNode(imageNamed: "enemy")
     enemy.position = CGPoint(x: size.width + enemy.size.width/2, y: size.height/2)
     addChild(enemy)
-    let actionMidMove = SKAction.moveTo(CGPoint(x: size.width/2, y:CGRectGetMinY(playableRect) + enemy.size.height/2), duration: 1.0)
-    let actionMove = SKAction.moveTo(CGPoint(x: -enemy.size.width/2, y:enemy.position.y), duration: 1.0)
+//    let actionMidMove = SKAction.moveTo(CGPoint(x: size.width/2, y:CGRectGetMinY(playableRect) + enemy.size.height/2), duration: 1.0)
+//    let actionMove = SKAction.moveTo(CGPoint(x: -enemy.size.width/2, y:enemy.position.y), duration: 1.0)
+    let actionMidMove = SKAction.moveByX(-size.width/2 - enemy.size.width/2, y: -CGRectGetHeight(playableRect)/2 + enemy.size.height/2, duration: 1.0)
+    let actionMove = SKAction.moveByX(-size.width/2-enemy.size.width/2, y: CGRectGetHeight(playableRect)/2 - enemy.size.height/2, duration: 1.0)
+    let reverseMid = actionMidMove.reversedAction()
+    let reverseMove = actionMove.reversedAction()
     let wait = SKAction.waitForDuration(0.25)
     let logMessage = SKAction.runBlock() {
       self.println("Reached bottom!")
     }
-    let sequence = SKAction.sequence([actionMidMove, logMessage, wait, actionMove])
+    let sequence = SKAction.sequence([actionMidMove, logMessage, wait, actionMove, reverseMove, logMessage, wait, reverseMid])
 
     enemy.runAction(sequence)
   }
