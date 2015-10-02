@@ -143,7 +143,8 @@ class GameScene: SKScene {
     let logMessage = SKAction.runBlock() {
       self.println("Reached bottom!")
     }
-    let sequence = SKAction.sequence([actionMidMove, logMessage, wait, actionMove, reverseMove, logMessage, wait, reverseMid])
+    let halfSequence = SKAction.sequence([actionMidMove, logMessage, wait, actionMove])
+    let sequence = SKAction.sequence([halfSequence, halfSequence.reversedAction()])
 
     enemy.runAction(sequence)
   }
