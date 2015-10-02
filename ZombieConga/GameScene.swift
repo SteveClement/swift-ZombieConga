@@ -143,8 +143,9 @@ class GameScene: SKScene {
     }
     let halfSequence = SKAction.sequence([actionMidMove, logMessage, wait, actionMove])
     let sequence = SKAction.sequence([halfSequence, halfSequence.reversedAction()])
+    let repeatAction = SKAction.repeatActionForever(sequence)
 
-    enemy.runAction(sequence)
+    enemy.runAction(repeatAction)
   }
 
   // Debug helpers
