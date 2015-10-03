@@ -170,11 +170,17 @@ class GameScene: SKScene {
     cat.position = CGPoint(x: CGFloat.random(min: CGRectGetMinX(playableRect), max: CGRectGetMaxX(playableRect)), y: CGFloat.random(min: CGRectGetMinY(playableRect), max: CGRectGetMaxY(playableRect)))
     cat.setScale(0)
     addChild(cat)
+    cat.zRotation = -π / 16.0
+    let leftWiggle = SKAction.rotateByAngle(π/8, duration: 0.5)
+    // one way could be to just repeat rotateByAngle with a negative π OR use .reversedAction() method (#preferred)
+    //let rightWiggle = SKAction.rotateByAngle(-π/8, duration: 0.5)
+    let rightWiggle = leftWiggle.reversedAction()
+    let fullWiggle = SKAction.sequence([leftWiggle, rightWiggle])
+    let wiggleWait = SKAction.repeatAction(fullWiggle, count: 10)
     let appear = SKAction.scaleTo(1.0, duration: 0.5)
-    let wait = SKAction.waitForDuration(10.0)
     let disappear = SKAction.scaleTo(0, duration: 0.5)
     let removeFromParent = SKAction.removeFromParent()
-    let actions = [appear, wait, disappear, removeFromParent]
+    let actions = [appear, wiggleWait, disappear, removeFromParent]
     cat.runAction(SKAction.sequence(actions))
   }
 
