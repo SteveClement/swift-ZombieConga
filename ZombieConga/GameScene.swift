@@ -62,7 +62,11 @@ class GameScene: SKScene {
     addChild(background)
     addChild(zombie)
     //zombie.runAction(SKAction.repeatActionForever(zombieAnimation))
+    // This needs some explaining due to the size of the runAction call
+    // First we invoke the repeatActionForever method of the SKAction class
+    // Because we have more then 1 action in our array we need to invoke a sequence, and because our sequence is in a function we use the runBlock method
     runAction(SKAction.repeatActionForever(SKAction.sequence([SKAction.runBlock(spawnEnemy), SKAction.waitForDuration(2.0)])))
+    runAction(SKAction.repeatActionForever(SKAction.sequence([SKAction.runBlock(spawnCat), SKAction.waitForDuration(1.0)])))
     debugDrawPlayableArea()
   }
   override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -160,6 +164,18 @@ class GameScene: SKScene {
   }
   func stopZombieAnimation() {
     zombie.removeActionForKey("animation")
+  }
+  func spawnCat() {
+    let cat = SKSpriteNode(imageNamed: "cat")
+    cat.position = CGPoint(x: CGFloat.random(min: CGRectGetMinX(playableRect), max: CGRectGetMaxX(playableRect)), y: CGFloat.random(min: CGRectGetMinY(playableRect), max: CGRectGetMaxY(playableRect)))
+    cat.setScale(0)
+    addChild(cat)
+    let appear = SKAction.scaleTo(1.0, duration: 0.5)
+    let wait = SKAction.waitForDuration(10.0)
+    let disappear = SKAction.scaleTo(0, duration: 0.5)
+    let removeFromParent = SKAction.removeFromParent()
+    let actions = [appear, wait, disappear, removeFromParent]
+    cat.runAction(SKAction.sequence(actions))
   }
 
   // Debug helpers
