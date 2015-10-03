@@ -20,7 +20,7 @@ class GameScene: SKScene {
   var lastTouchLocation: CGPoint?
   let zombieRotateRadiansPerSec:CGFloat = 4.0 * π
 
-  let debug = true
+  let debug = false
 
 
   // Overrides
@@ -131,21 +131,11 @@ class GameScene: SKScene {
   }
   func spawnEnemy() {
     let enemy = SKSpriteNode(imageNamed: "enemy")
-    enemy.position = CGPoint(x: size.width + enemy.size.width/2, y: size.height/2)
+    enemy.position = CGPoint(x: size.width + enemy.size.width/2, y: CGFloat.random(min: CGRectGetMinY(playableRect) + enemy.size.height/2, max: CGRectGetMaxY(playableRect) - enemy.size.height/2))
     addChild(enemy)
-//    let actionMidMove = SKAction.moveTo(CGPoint(x: size.width/2, y:CGRectGetMinY(playableRect) + enemy.size.height/2), duration: 1.0)
-//    let actionMove = SKAction.moveTo(CGPoint(x: -enemy.size.width/2, y:enemy.position.y), duration: 1.0)
-    let actionMidMove = SKAction.moveByX(-size.width/2 - enemy.size.width/2, y: -CGRectGetHeight(playableRect)/2 + enemy.size.height/2, duration: 1.0)
-    let actionMove = SKAction.moveByX(-size.width/2-enemy.size.width/2, y: CGRectGetHeight(playableRect)/2 - enemy.size.height/2, duration: 1.0)
-    let wait = SKAction.waitForDuration(0.25)
-    let logMessage = SKAction.runBlock() {
-      self.println("Reached bottom!")
-    }
-    let halfSequence = SKAction.sequence([actionMidMove, logMessage, wait, actionMove])
-    let sequence = SKAction.sequence([halfSequence, halfSequence.reversedAction()])
-    let repeatAction = SKAction.repeatActionForever(sequence)
+    let actionMove = SKAction.moveToX(-enemy.size.width/2, duration: 1.0)
 
-    enemy.runAction(repeatAction)
+    enemy.runAction(actionMove)
   }
 
   // Debug helpers
