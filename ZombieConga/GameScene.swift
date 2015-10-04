@@ -101,6 +101,9 @@ class GameScene: SKScene {
     }
 
     boundsCheckZombie()
+    //checkCollision()
+  }
+  override func didEvaluateActions() {
     checkCollision()
   }
 
