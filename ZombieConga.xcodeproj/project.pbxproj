@@ -20,6 +20,7 @@
 		AAE30CAD1BB5B1F000215941 /* sprites.atlas in Resources */ = {isa = PBXBuildFile; fileRef = AAE30CAC1BB5B1F000215941 /* sprites.atlas */; };
 		AAE30CAF1BB5B2EC00215941 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AAE30CAE1BB5B2EC00215941 /* Assets.xcassets */; };
 		AAE30CB11BB6F94900215941 /* MyUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE30CB01BB6F94900215941 /* MyUtils.swift */; };
+		AAED852C1BC13319009EB81F /* Sounds in Resources */ = {isa = PBXBuildFile; fileRef = AAED852B1BC13319009EB81F /* Sounds */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		AAE30CAC1BB5B1F000215941 /* sprites.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; name = sprites.atlas; path = Images/sprites.atlas; sourceTree = "<group>"; };
 		AAE30CAE1BB5B2EC00215941 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AAE30CB01BB6F94900215941 /* MyUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyUtils.swift; sourceTree = "<group>"; };
+		AAED852B1BC13319009EB81F /* Sounds */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Sounds; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +72,7 @@
 		AAE30C8A1BB47CB000215941 /* ZombieConga */ = {
 			isa = PBXGroup;
 			children = (
+				AAED852B1BC13319009EB81F /* Sounds */,
 				AAE30CA11BB5B1C900215941 /* Images */,
 				AAE30CAC1BB5B1F000215941 /* sprites.atlas */,
 				AAE30C8B1BB47CB000215941 /* AppDelegate.swift */,
@@ -154,6 +157,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AAED852C1BC13319009EB81F /* Sounds in Resources */,
 				AAE30CAB1BB5B1C900215941 /* YouWin.png in Resources */,
 				AAE30CAD1BB5B1F000215941 /* sprites.atlas in Resources */,
 				AAE30C9A1BB47CB000215941 /* LaunchScreen.storyboard in Resources */,
