@@ -20,6 +20,8 @@ class GameScene: SKScene {
   var lastTouchLocation: CGPoint?
   let zombieRotateRadiansPerSec:CGFloat = 4.0 * π
   let zombieAnimation: SKAction
+  let catCollisionSound: SKAction = SKAction.playSoundFileNamed("hitCat.wav", waitForCompletion: false)
+  let enemyCollisionSound: SKAction = SKAction.playSoundFileNamed("hitCatLady.wav", waitForCompletion: false)
 
   let debug = false
 
@@ -195,11 +197,11 @@ class GameScene: SKScene {
   }
   func zombieHitCat(cat: SKSpriteNode) {
     cat.removeFromParent()
-    runAction(SKAction.playSoundFileNamed("hitCat.wav", waitForCompletion: false))
+    runAction(catCollisionSound)
   }
   func zombieHitEnemy(enemy: SKSpriteNode) {
     enemy.removeFromParent()
-    runAction(SKAction.playSoundFileNamed("hitCatlady.wav", waitForCompletion: false))
+    runAction(enemyCollisionSound)
   }
   func checkCollision() {
     var hitCats: [SKSpriteNode] = []
