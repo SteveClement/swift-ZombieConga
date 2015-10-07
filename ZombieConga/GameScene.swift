@@ -23,6 +23,8 @@ class GameScene: SKScene {
   let catCollisionSound: SKAction = SKAction.playSoundFileNamed("hitCat.wav", waitForCompletion: false)
   let enemyCollisionSound: SKAction = SKAction.playSoundFileNamed("hitCatLady.wav", waitForCompletion: false)
   var zombieInvincible = false
+  let catsMovePointPerSec: CGFloat = 480.0
+  
 
   let debug = false
 
@@ -59,6 +61,7 @@ class GameScene: SKScene {
     background.zPosition = -1
     
     zombie.position = CGPoint(x: 400.0, y: 400.0)
+    zombie.zPosition = 100
     //zombie.xScale = 2.0
     //zombie.yScale = 2.0
     //zombie.setScale(2.0)
@@ -197,27 +200,31 @@ class GameScene: SKScene {
     cat.runAction(SKAction.sequence(actions))
   }
   func zombieHitCat(cat: SKSpriteNode) {
-    cat.removeFromParent()
+    cat.name = "train"
     runAction(catCollisionSound)
+    cat.removeAllActions()
+    cat.setScale(1.0)
+    cat.zRotation = 0
+    cat.runAction(SKAction.colorizeWithColor(SKColor.greenColor(), colorBlendFactor: 1.0, duration: 0.2))
   }
   func zombieHitEnemy(enemy: SKSpriteNode) {
-    if zombieInvincible {
-      return
-    } else {
     let blinkTimes = 10.0
     let duration = 3.0
     let blinkAction = SKAction.customActionWithDuration(duration) {
       node, elapsedTime in
+      var zombieInvincible = true
       let slice = duration / blinkTimes
       let remainder = Double(elapsedTime) % slice
       node.hidden = remainder > slice / 2
       print(elapsedTime)
+      if elapsedTime == 3.0 {
+        var zombieInvincible = false
+        print(zombieInvincible)
+      }
     }
-
     enemy.removeFromParent()
     runAction(SKAction.sequence([enemyCollisionSound]))
     zombie.runAction(blinkAction)
-    }
   }
   func checkCollision() {
     var hitCats: [SKSpriteNode] = []
@@ -241,6 +248,23 @@ class GameScene: SKScene {
       for enemy in hitEnemies {
         zombieHitEnemy(enemy)
       }
+    }
+  }
+  func moveTrain() {
+    var targetPosition = zombie.position
+    
+    enumerateChildNodesWithName("train") {
+      node, _ in
+      if !node.hasActions() {
+        let actionDuration = 3.0
+        let offset = // a. You need to figure out the offset between the cat’s current position and the target position.
+        let direction = // b. You need to figure out a unit vector pointing in the direction of the offset.
+        let amountToMovePerSec = // c.
+        let amountToMove = π // d. You need to get a fraction of the amountToMovePerSec vector, based on the actionDuration. This represents the offset the cat should move over the next actionDuration seconds. Note you’ll need to cast actionDuration to a CGFloat.
+        let moveAction = SKAction.moveBy(CGVector, duration: 1.0) // e. You should move the cat a relative amount based on the amountToMove.
+        node.runAction(moveAction)
+      }
+      targetPosition = node.position
     }
   }
 
