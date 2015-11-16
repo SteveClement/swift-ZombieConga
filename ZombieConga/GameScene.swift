@@ -153,6 +153,7 @@ class GameScene: SKScene {
   func rotateSprite(sprite: SKSpriteNode, direction: CGPoint, rotateRadiansPerSec: CGFloat) {
     let shortest = shortestAngleBetween(sprite.zRotation, angle2: velocity.angle)
     let amountToRotate = min(rotateRadiansPerSec * CGFloat(dt), abs(shortest))
+    print("Shortest contains: \(shortest) and .sign of it is: \(shortest.sign()) zRotation is \(sprite.zRotation) angle2 is: \(velocity)")
     sprite.zRotation += shortest.sign() * amountToRotate
 
   }
@@ -208,24 +209,27 @@ class GameScene: SKScene {
     cat.runAction(SKAction.colorizeWithColor(SKColor.greenColor(), colorBlendFactor: 1.0, duration: 0.2))
   }
   func zombieHitEnemy(enemy: SKSpriteNode) {
+
+    runAction(SKAction.sequence([enemyCollisionSound]))
+    
+    zombieInvincible = true
+
     let blinkTimes = 10.0
     let duration = 3.0
     let blinkAction = SKAction.customActionWithDuration(duration) {
       node, elapsedTime in
-      var zombieInvincible = true
       let slice = duration / blinkTimes
       let remainder = Double(elapsedTime) % slice
       node.hidden = remainder > slice / 2
-      print(elapsedTime)
-      if elapsedTime == 3.0 {
-        var zombieInvincible = false
-        print(zombieInvincible)
-      }
     }
-    enemy.removeFromParent()
-    runAction(SKAction.sequence([enemyCollisionSound]))
-    zombie.runAction(blinkAction)
+    let setHidden = SKAction.runBlock() {
+      self.zombie.hidden = false
+      self.zombieInvincible = false
+    }
+    
+    zombie.runAction(SKAction.sequence([blinkAction, setHidden]))
   }
+  
   func checkCollision() {
     var hitCats: [SKSpriteNode] = []
     enumerateChildNodesWithName("cat") { node, _ in
@@ -237,19 +241,24 @@ class GameScene: SKScene {
     for cat in hitCats {
       zombieHitCat(cat)
     }
-    if !zombieInvincible {
-      var hitEnemies: [SKSpriteNode] = []
-      enumerateChildNodesWithName("enemy") { node, _ in
-        let enemy = node as! SKSpriteNode
-        if CGRectIntersectsRect(CGRectInset(enemy.frame, 20, 20), self.zombie.frame) {
+    
+    if zombieInvincible {
+      return
+    }
+    
+    var hitEnemies: [SKSpriteNode] = []
+    enumerateChildNodesWithName("enemy") { node, _ in
+      let enemy = node as! SKSpriteNode
+      if CGRectIntersectsRect(
+        CGRectInset(node.frame, 20, 20), self.zombie.frame) {
           hitEnemies.append(enemy)
-        }
-      }
-      for enemy in hitEnemies {
-        zombieHitEnemy(enemy)
       }
     }
+    for enemy in hitEnemies {
+      zombieHitEnemy(enemy)
+    }
   }
+  
   func moveTrain() {
     var targetPosition = zombie.position
     
@@ -257,12 +266,12 @@ class GameScene: SKScene {
       node, _ in
       if !node.hasActions() {
         let actionDuration = 3.0
-        let offset = // a. You need to figure out the offset between the cat’s current position and the target position.
-        let direction = // b. You need to figure out a unit vector pointing in the direction of the offset.
-        let amountToMovePerSec = // c.
+//        let offset = // a. You need to figure out the offset between the cat’s current position and the target position.
+//        let direction = // b. You need to figure out a unit vector pointing in the direction of the offset.
+//        let amountToMovePerSec = // c.
         let amountToMove = π // d. You need to get a fraction of the amountToMovePerSec vector, based on the actionDuration. This represents the offset the cat should move over the next actionDuration seconds. Note you’ll need to cast actionDuration to a CGFloat.
-        let moveAction = SKAction.moveBy(CGVector, duration: 1.0) // e. You should move the cat a relative amount based on the amountToMove.
-        node.runAction(moveAction)
+//        let moveAction = SKAction.moveBy(CGVector, duration: 1.0) // e. You should move the cat a relative amount based on the amountToMove.
+//        node.runAction(moveAction)
       }
       targetPosition = node.position
     }
