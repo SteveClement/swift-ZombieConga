@@ -20,7 +20,7 @@
 		AAE30CAD1BB5B1F000215941 /* sprites.atlas in Resources */ = {isa = PBXBuildFile; fileRef = AAE30CAC1BB5B1F000215941 /* sprites.atlas */; };
 		AAE30CAF1BB5B2EC00215941 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AAE30CAE1BB5B2EC00215941 /* Assets.xcassets */; };
 		AAE30CB11BB6F94900215941 /* MyUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE30CB01BB6F94900215941 /* MyUtils.swift */; };
-		AAED852C1BC13319009EB81F /* Sounds in Resources */ = {isa = PBXBuildFile; fileRef = AAED852B1BC13319009EB81F /* Sounds */; settings = {ASSET_TAGS = (); }; };
+		AAED852C1BC13319009EB81F /* Sounds in Resources */ = {isa = PBXBuildFile; fileRef = AAED852B1BC13319009EB81F /* Sounds */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -296,7 +296,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = ZombieConga/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = lu.localhost.ZombieConga;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -311,7 +311,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = ZombieConga/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = lu.localhost.ZombieConga;
 				PRODUCT_NAME = "$(TARGET_NAME)";
