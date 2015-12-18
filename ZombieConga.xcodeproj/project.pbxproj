@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AA480CCD1C23F73F009F4DD2 /* GameOverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA480CCC1C23F73F009F4DD2 /* GameOverScene.swift */; };
 		AAE30C8C1BB47CB000215941 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE30C8B1BB47CB000215941 /* AppDelegate.swift */; };
 		AAE30C901BB47CB000215941 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE30C8F1BB47CB000215941 /* GameScene.swift */; };
 		AAE30C921BB47CB000215941 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE30C911BB47CB000215941 /* GameViewController.swift */; };
@@ -24,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AA480CCC1C23F73F009F4DD2 /* GameOverScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverScene.swift; sourceTree = "<group>"; };
 		AAE30C881BB47CB000215941 /* ZombieConga.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZombieConga.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AAE30C8B1BB47CB000215941 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AAE30C8F1BB47CB000215941 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
@@ -77,6 +79,7 @@
 				AAE30CAC1BB5B1F000215941 /* sprites.atlas */,
 				AAE30C8B1BB47CB000215941 /* AppDelegate.swift */,
 				AAE30C8F1BB47CB000215941 /* GameScene.swift */,
+				AA480CCC1C23F73F009F4DD2 /* GameOverScene.swift */,
 				AAE30C911BB47CB000215941 /* GameViewController.swift */,
 				AAE30CB01BB6F94900215941 /* MyUtils.swift */,
 				AAE30C931BB47CB000215941 /* Main.storyboard */,
@@ -177,6 +180,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA480CCD1C23F73F009F4DD2 /* GameOverScene.swift in Sources */,
 				AAE30C901BB47CB000215941 /* GameScene.swift in Sources */,
 				AAE30C921BB47CB000215941 /* GameViewController.swift in Sources */,
 				AAE30C8C1BB47CB000215941 /* AppDelegate.swift in Sources */,

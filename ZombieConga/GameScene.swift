@@ -45,6 +45,8 @@ class GameScene: SKScene {
   let enemyCollisionSound: SKAction = SKAction.playSoundFileNamed("hitCatLady.wav", waitForCompletion: false)
   var zombieInvincible = false
   let catMovePointPerSec: CGFloat = 480.0
+  var lives = 5
+  var gameOver = false
 
   let debug = false
 
@@ -100,11 +102,13 @@ class GameScene: SKScene {
     let touchLocation = touch.locationInNode(self)
     sceneTouched(touchLocation)
   }
+  
   override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
     let touch = touches.first as UITouch!
     let touchLocation = touch.locationInNode(self)
     sceneTouched(touchLocation)
   }
+  
   override func update(currentTime: CFTimeInterval) {
     if lastUpdateTime > 0 {
       dt = currentTime - lastUpdateTime
@@ -129,7 +133,16 @@ class GameScene: SKScene {
     boundsCheckZombie()
     //checkCollision()
     moveTrain()
+    if lives <= 0 && !gameOver {
+      gameOver = true
+      let gameOverScene = GameOverScene(size: size, won: false)
+      gameOverScene.scaleMode = scaleMode
+      let reveal = SKTransition.flipHorizontalWithDuration(0.5)
+      view?.presentScene(gameOverScene, transition: reveal)
+      println("You lose!")
+    }
   }
+  
   override func didEvaluateActions() {
     checkCollision()
   }
@@ -140,16 +153,19 @@ class GameScene: SKScene {
     println("Amount to move: \(amountToMove)")
     sprite.position += amountToMove
   }
+  
   func moveZombieToward(location: CGPoint) {
     startZombieAnimation()
     let offset = location - zombie.position
     let direction = offset.normalized()
     velocity = direction * zombieMovePointPerSec
   }
+  
   func sceneTouched(touchLocation: CGPoint) {
     lastTouchLocation = touchLocation
     moveZombieToward(touchLocation)
   }
+  
   func boundsCheckZombie() {
     let bottomLeft = CGPoint(x: 0, y: CGRectGetMinY(playableRect))
     let topRight = CGPoint(x: size.width, y: CGRectGetMaxY(playableRect))
@@ -171,16 +187,21 @@ class GameScene: SKScene {
       velocity.y = -velocity.y
     }
   }
+  
   func rotateSprite(sprite: SKSpriteNode, direction: CGPoint, rotateRadiansPerSec: CGFloat) {
     let shortest = shortestAngleBetween(sprite.zRotation, angle2: velocity.angle)
     let amountToRotate = min(rotateRadiansPerSec * CGFloat(dt), abs(shortest))
-    print("Shortest contains: \(shortest) and .sign of it is: \(shortest.sign()) zRotation is \(sprite.zRotation) angle2 is: \(velocity)")
+    if debug {
+      print("Shortest contains: \(shortest) and .sign of it is: \(shortest.sign()) zRotation is \(sprite.zRotation) angle2 is: \(velocity)")
+    }
     sprite.zRotation += shortest.sign() * amountToRotate
 
   }
+  
   func distanceCheckZombie(lastTouchLocation: CGPoint, touchLocation: CGPoint) {
     print("Last: \(lastTouchLocation) \nCurrent: \(touchLocation)")
   }
+  
   func spawnEnemy() {
     let enemy = SKSpriteNode(imageNamed: "enemy")
     enemy.name = "enemy"
@@ -221,6 +242,7 @@ class GameScene: SKScene {
     let actions = [appear, groupWait, disappear, removeFromParent]
     cat.runAction(SKAction.sequence(actions))
   }
+  
   func zombieHitCat(cat: SKSpriteNode) {
     cat.name = "train"
     runAction(catCollisionSound)
@@ -230,10 +252,13 @@ class GameScene: SKScene {
     let turnGreen = SKAction.colorizeWithColor(SKColor.greenColor(), colorBlendFactor: 1.0, duration: 0.2)
     cat.runAction(turnGreen)
   }
+  
   func zombieHitEnemy(enemy: SKSpriteNode) {
 
     //runAction(SKAction.sequence([enemyCollisionSound]))
-    runAction(SKAction.playSoundFileNamed("hitCatLady.wav", waitForCompletion: false))
+    // // runAction(SKAction.playSoundFileNamed("hitCatLady.wav", waitForCompletion: false))
+    loseCats()
+    lives--
     zombieInvincible = true
 
     let blinkTimes = 10.0
@@ -283,8 +308,10 @@ class GameScene: SKScene {
   
   func moveTrain() {
     var targetPosition = zombie.position
+    var trainCount = 0
     
     enumerateChildNodesWithName("train") { node, stop in
+      trainCount++
       if !node.hasActions() {
         let actionDuration = 0.3
         let offset = targetPosition - node.position // a. You need to figure out the offset between the cat’s current position and the target position.
@@ -296,7 +323,39 @@ class GameScene: SKScene {
       }
       targetPosition = node.position
     }
+    if trainCount >= 10 && !gameOver {
+      gameOver = true
+      let gameOverScene = GameOverScene(size: size, won: true)
+      gameOverScene.scaleMode = scaleMode
+      let reveal = SKTransition.flipHorizontalWithDuration(0.5)
+      view?.presentScene(gameOverScene, transition: reveal)
+      println("You win!")
+    }
   }
+  
+  func loseCats() {
+    var loseCount = 0
+    enumerateChildNodesWithName("train") { node, stop in
+      var randomSpot = node.position
+      randomSpot.x += CGFloat.random(min: -100, max: 100)
+      randomSpot.x += CGFloat.random(min: -100, max: 100)
+      node.name = ""
+      node.runAction(
+        SKAction.sequence([
+          SKAction.group([
+            SKAction.rotateByAngle(π*4, duration: 1.0),
+            SKAction.moveTo(randomSpot, duration: 1.0),
+            SKAction.scaleTo(0, duration: 1.0)
+          ]),
+          SKAction.removeFromParent()
+        ]))
+      loseCount++
+      if loseCount >= 2 {
+        stop.memory = true
+      }
+  }
+  }
+  
 
   // Debug helpers
   func println(content: NSString) {
