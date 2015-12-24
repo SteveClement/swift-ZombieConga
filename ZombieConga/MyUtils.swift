@@ -29,6 +29,7 @@
 
 import Foundation
 import CoreGraphics
+import AVFoundation
 
 // The following will extent the basic operations, +-*/ to be able to calculate vectors etc.
 // Before implementing this you would get an error because the (run-time) compiler wouldn't
@@ -76,7 +77,7 @@ func /= (inout point: CGPoint, scalar: CGFloat) {
   point = point / scalar
 }
 // This only gets considered if we are NOT (!) running on a 64bit Platform
-#if !(arch(x86_64) || arch(amd64))
+#if !(arch(x86_64) || arch(arm64))
   func atan2(y: CGFloat, x: CGFloat) -> CGFloat {
     return CGFloat(atan2f(Float(y), Float(x)))
   }
@@ -124,5 +125,26 @@ extension CGFloat {
   static func random(min min: CGFloat, max: CGFloat) -> CGFloat {
     assert(min < max)
     return CGFloat.random() * (max - min) + min
+  }
+}
+
+var backgroundMusicPlayer: AVAudioPlayer!
+
+func playBackgroundMusic(filename: String) {
+  let resourceUrl = NSBundle.mainBundle().URLForResource(filename, withExtension: nil)
+  guard let url = resourceUrl else {
+    print("Couldn't find file: \(filename)")
+    return
+  }
+  
+  // Catch error…
+  do {
+    try backgroundMusicPlayer =  AVAudioPlayer(contentsOfURL: url)
+    backgroundMusicPlayer.numberOfLoops = -1
+    backgroundMusicPlayer.prepareToPlay()
+    backgroundMusicPlayer.play()
+  } catch {
+    // error
+    print("Couldn't create audio player!")
   }
 }

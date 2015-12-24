@@ -75,6 +75,7 @@ class GameScene: SKScene {
     fatalError("init(coder:) has not been implemented")
   }
   override func didMoveToView(view: SKView) {
+    playBackgroundMusic("backgroundMusic.mp3")
     backgroundColor = SKColor.whiteColor()
     let background = SKSpriteNode(imageNamed: "background1")
     //background.position = CGPoint(x: size.width/2, y: size.height/2)
@@ -140,6 +141,7 @@ class GameScene: SKScene {
       let reveal = SKTransition.flipHorizontalWithDuration(0.5)
       view?.presentScene(gameOverScene, transition: reveal)
       println("You lose!")
+      backgroundMusicPlayer.stop()
     }
   }
   
@@ -330,6 +332,7 @@ class GameScene: SKScene {
       let reveal = SKTransition.flipHorizontalWithDuration(0.5)
       view?.presentScene(gameOverScene, transition: reveal)
       println("You win!")
+      backgroundMusicPlayer.stop()
     }
   }
   
