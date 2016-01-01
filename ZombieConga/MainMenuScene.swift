@@ -31,13 +31,9 @@ class MainMenuScene: SKScene {
   }
 
   func sceneTapped() {
-    let wait = SKAction.waitForDuration(1.0)
-    let block = SKAction.runBlock {
-      let myScene = GameScene(size: self.size)
-      myScene.scaleMode = self.scaleMode
-      let reveal = SKTransition.revealWithDirection(.Left, duration: 0.5)
-      self.view?.presentScene(myScene, transition: reveal)
-    }
-    self.runAction(SKAction.sequence([wait, block]))
+    let myScene = GameScene(size: self.size)
+    myScene.scaleMode = self.scaleMode
+    let reveal = SKTransition.doorwayWithDuration(1.5)
+    self.view?.presentScene(myScene, transition: reveal)
     }
 }
