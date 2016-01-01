@@ -31,6 +31,8 @@ import Foundation
 import CoreGraphics
 import AVFoundation
 
+// Icon sizes: https://developer.apple.com/library/ios/documentation/UserExperience/Conceptual/MobileHIG/IconMatrix.html
+
 // The following will extent the basic operations, +-*/ to be able to calculate vectors etc.
 // Before implementing this you would get an error because the (run-time) compiler wouldn't
 // know how to handle CGPoints for example. Now it has a reference on what to do

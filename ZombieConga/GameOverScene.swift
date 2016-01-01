@@ -27,13 +27,13 @@ class GameOverScene: SKScene {
       background = SKSpriteNode(imageNamed: "YouWin")
       runAction(SKAction.sequence([
         SKAction.waitForDuration(0.1),
-        SKAction.playSoundFileNamed("win.wav", waitForCompletion: false)
+        SKAction.playSoundFileNamed("Sounds/win.wav", waitForCompletion: false)
       ]))
     } else {
       background = SKSpriteNode(imageNamed: "YouLose")
       runAction(SKAction.sequence([
         SKAction.waitForDuration(0.1),
-        SKAction.playSoundFileNamed("lose.wav", waitForCompletion: false)
+        SKAction.playSoundFileNamed("Sounds/lose.wav", waitForCompletion: false)
         ]))
     }
     background.position = CGPoint(x: self.size.width/2, y: self.size.height/2)

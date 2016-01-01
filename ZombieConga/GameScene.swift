@@ -42,8 +42,8 @@ class GameScene: SKScene {
   let zombieRotateRadiansPerSec:CGFloat = 4.0 * π
   let zombieAnimation: SKAction
   // We create this action so it is re-useable and use less ressources
-  let catCollisionSound: SKAction = SKAction.playSoundFileNamed("hitCat.wav", waitForCompletion: false)
-  let enemyCollisionSound: SKAction = SKAction.playSoundFileNamed("hitCatLady.wav", waitForCompletion: false)
+  let catCollisionSound: SKAction = SKAction.playSoundFileNamed("Sounds/hitCat.wav", waitForCompletion: false)
+  let enemyCollisionSound: SKAction = SKAction.playSoundFileNamed("Sounds/hitCatLady.wav", waitForCompletion: false)
   var zombieInvincible = false
   let catMovePointPerSec: CGFloat = 480.0
   var lives = 5
@@ -76,7 +76,7 @@ class GameScene: SKScene {
     fatalError("init(coder:) has not been implemented")
   }
   override func didMoveToView(view: SKView) {
-    playBackgroundMusic("backgroundMusic.mp3")
+    playBackgroundMusic("Sounds/backgroundMusic.mp3")
     backgroundColor = SKColor.whiteColor()
     let background = SKSpriteNode(imageNamed: "background1")
     //background.position = CGPoint(x: size.width/2, y: size.height/2)
@@ -142,11 +142,6 @@ class GameScene: SKScene {
       let reveal = SKTransition.flipHorizontalWithDuration(0.5)
       view?.presentScene(gameOverScene, transition: reveal)
       println("You lose!")
-      // 2016-01-01 19:26:29.534 ZombieConga[16245:2009022] SKAction: Error loading sound resource: "hitCat.wav"
-      // 2016-01-01 19:26:29.535 ZombieConga[16245:2009022] SKAction: Error loading sound resource: "hitCatLady.wav"
-      // Couldn't find file: backgroundMusic.mp3
-      // 2016-01-01 19:26:54.532 ZombieConga[16245:2009022] SKAction: Error loading sound resource: "lose.wav"
-      // fatal error: unexpectedly found nil while unwrapping an Optional value
       backgroundMusicPlayer.stop()
     }
   }
@@ -262,9 +257,7 @@ class GameScene: SKScene {
   }
   
   func zombieHitEnemy(enemy: SKSpriteNode) {
-
-    //runAction(SKAction.sequence([enemyCollisionSound]))
-    // // runAction(SKAction.playSoundFileNamed("hitCatLady.wav", waitForCompletion: false))
+    runAction(SKAction.sequence([enemyCollisionSound]))
     loseCats()
     lives--
     zombieInvincible = true
