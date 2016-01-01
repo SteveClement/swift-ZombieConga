@@ -41,6 +41,7 @@ class GameScene: SKScene {
   var lastTouchLocation: CGPoint?
   let zombieRotateRadiansPerSec:CGFloat = 4.0 * π
   let zombieAnimation: SKAction
+  // We create this action so it is re-useable and use less ressources
   let catCollisionSound: SKAction = SKAction.playSoundFileNamed("hitCat.wav", waitForCompletion: false)
   let enemyCollisionSound: SKAction = SKAction.playSoundFileNamed("hitCatLady.wav", waitForCompletion: false)
   var zombieInvincible = false
@@ -141,6 +142,11 @@ class GameScene: SKScene {
       let reveal = SKTransition.flipHorizontalWithDuration(0.5)
       view?.presentScene(gameOverScene, transition: reveal)
       println("You lose!")
+      // 2016-01-01 19:26:29.534 ZombieConga[16245:2009022] SKAction: Error loading sound resource: "hitCat.wav"
+      // 2016-01-01 19:26:29.535 ZombieConga[16245:2009022] SKAction: Error loading sound resource: "hitCatLady.wav"
+      // Couldn't find file: backgroundMusic.mp3
+      // 2016-01-01 19:26:54.532 ZombieConga[16245:2009022] SKAction: Error loading sound resource: "lose.wav"
+      // fatal error: unexpectedly found nil while unwrapping an Optional value
       backgroundMusicPlayer.stop()
     }
   }

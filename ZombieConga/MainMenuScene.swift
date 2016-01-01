@@ -27,12 +27,10 @@ class MainMenuScene: SKScene {
   }
 
   override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-    let touch = touches.first as UITouch!
-    let touchLocation = touch.locationInNode(self)
-    sceneTapped(touchLocation)
+    sceneTapped()
   }
 
-  func sceneTapped(touchLocation: CGPoint) {
+  func sceneTapped() {
     let wait = SKAction.waitForDuration(1.0)
     let block = SKAction.runBlock {
       let myScene = GameScene(size: self.size)
