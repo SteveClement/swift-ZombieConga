@@ -107,13 +107,13 @@ class GameScene: SKScene {
   }
   override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
     let touch = touches.first as UITouch!
-    let touchLocation = touch.locationInNode(self)
+    let touchLocation = touch.locationInNode(backgroundLayer)
     sceneTouched(touchLocation)
   }
   
   override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
     let touch = touches.first as UITouch!
-    let touchLocation = touch.locationInNode(self)
+    let touchLocation = touch.locationInNode(backgroundLayer)
     sceneTouched(touchLocation)
   }
   
@@ -128,14 +128,14 @@ class GameScene: SKScene {
 
     if let lastTouch = lastTouchLocation {
       let diff = lastTouch - zombie.position
-      if (diff.length() <= zombieMovePointPerSec * CGFloat(dt)) {
+      /* if (diff.length() <= zombieMovePointPerSec * CGFloat(dt)) {
         zombie.position = lastTouchLocation!
         velocity = CGPointZero
         stopZombieAnimation()
-      } else {
-        moveSprite(zombie, velocity: velocity)
+      } else { */
+      moveSprite(zombie, velocity: velocity)
         rotateSprite(zombie, direction: velocity, rotateRadiansPerSec: zombieRotateRadiansPerSec)
-      }
+      // }
     }
 
     boundsCheckZombie()
@@ -391,7 +391,8 @@ class GameScene: SKScene {
     backgroundLayer.position += amountToMove
     backgroundLayer.enumerateChildNodesWithName("background") { node, _ in
       let background = node as! SKSpriteNode
-      if background.position.x <= -background.size.width {
+      let backgroundScreenPos = self.backgroundLayer.convertPoint( background.position, toNode: self)
+      if backgroundScreenPos.x <= -background.size.width {
         background.position = CGPoint(x: background.position.x + background.size.width*2,
         y: background.position.y)
       }
