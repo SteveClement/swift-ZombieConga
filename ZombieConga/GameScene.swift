@@ -79,18 +79,20 @@ class GameScene: SKScene {
   override func didMoveToView(view: SKView) {
     playBackgroundMusic("Sounds/backgroundMusic.mp3")
     backgroundColor = SKColor.whiteColor()
-    let background = backgroundNode()
-    background.anchorPoint = CGPointZero
-    background.position = CGPointZero
-    background.zPosition = -1
-    background.name = "background"
+    for i in 0...1 {
+      let background = backgroundNode()
+      background.anchorPoint = CGPointZero
+      background.position = CGPoint(x: CGFloat(i) * background.size.width, y: 0)
+      background.zPosition = -1
+      background.name = "background"
+      addChild(background)
+    }
     
     zombie.position = CGPoint(x: 400.0, y: 400.0)
     zombie.zPosition = 100
     //zombie.xScale = 2.0
     //zombie.yScale = 2.0
     //zombie.setScale(2.0)
-    addChild(background)
     addChild(zombie)
     //zombie.runAction(SKAction.repeatActionForever(zombieAnimation))
     // This needs some explaining due to the size of the runAction call
@@ -385,6 +387,10 @@ class GameScene: SKScene {
       let backgroundVelocity = CGPoint(x: -self.backgroundMovePointsPerSec, y: 0)
       let amountToMove = backgroundVelocity * CGFloat(self.dt)
       background.position += amountToMove
+      if background.position.x <= -background.size.width {
+        background.position = CGPoint(x: background.position.x + background.size.width*2,
+        y: background.position.y)
+      }
     }
   }
   
