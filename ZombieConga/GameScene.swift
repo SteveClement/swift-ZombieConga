@@ -46,6 +46,7 @@ class GameScene: SKScene {
   let enemyCollisionSound: SKAction = SKAction.playSoundFileNamed("Sounds/hitCatLady.wav", waitForCompletion: false)
   var zombieInvincible = false
   let catMovePointPerSec: CGFloat = 480.0
+  let backgroundMovePointsPerSec: CGFloat = 200.0
   var lives = 5
   var gameOver = false
 
@@ -78,11 +79,11 @@ class GameScene: SKScene {
   override func didMoveToView(view: SKView) {
     playBackgroundMusic("Sounds/backgroundMusic.mp3")
     backgroundColor = SKColor.whiteColor()
-    let background = SKSpriteNode(imageNamed: "background1")
-    //background.position = CGPoint(x: size.width/2, y: size.height/2)
+    let background = backgroundNode()
     background.anchorPoint = CGPointZero
     background.position = CGPointZero
     background.zPosition = -1
+    background.name = "background"
     
     zombie.position = CGPoint(x: 400.0, y: 400.0)
     zombie.zPosition = 100
@@ -135,6 +136,8 @@ class GameScene: SKScene {
     boundsCheckZombie()
     //checkCollision()
     moveTrain()
+    moveBackground()
+  
     if lives <= 0 && !gameOver {
       gameOver = true
       let gameOverScene = GameOverScene(size: size, won: false)
@@ -356,6 +359,33 @@ class GameScene: SKScene {
         stop.memory = true
       }
   }
+  }
+  
+  func backgroundNode() -> SKSpriteNode {
+    let backgroundNode = SKSpriteNode()
+    backgroundNode.anchorPoint = CGPointZero
+    backgroundNode.name = "background"
+    let background1 = SKSpriteNode(imageNamed: "background1")
+    background1.anchorPoint = CGPointZero
+    background1.position = CGPoint(x: 0, y: 0)
+    backgroundNode.addChild(background1)
+    
+    let background2 = SKSpriteNode(imageNamed: "background2")
+    background2.anchorPoint = CGPointZero
+    background2.position = CGPoint(x: size.width, y: 0)
+    backgroundNode.addChild(background2)
+    
+    backgroundNode.size = CGSize(width: background1.size.width + background2.size.width, height: background1.size.height)
+    return backgroundNode
+  }
+  
+  func moveBackground() {
+    enumerateChildNodesWithName("background") { node, _ in
+      let background = node as! SKSpriteNode
+      let backgroundVelocity = CGPoint(x: -self.backgroundMovePointsPerSec, y: 0)
+      let amountToMove = backgroundVelocity * CGFloat(self.dt)
+      background.position += amountToMove
+    }
   }
   
 
