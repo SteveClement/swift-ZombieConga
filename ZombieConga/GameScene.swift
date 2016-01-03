@@ -140,7 +140,7 @@ class GameScene: SKScene {
     debugDrawPlayableArea()
   }
   
-  #if os(iOS)
+  #if os(iOS) || os(tvOS)
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
       guard let touch = touches.first else {
         return
@@ -155,7 +155,9 @@ class GameScene: SKScene {
       let touchLocation = touch.locationInNode(self)
       sceneTouched(touchLocation)
     }
-  #else
+  #endif
+  
+  #if os(OSX)
     override func mouseDown(theEvent: NSEvent) {
       let touchLocation = theEvent.locationInNode(self)
       sceneTouched(touchLocation)

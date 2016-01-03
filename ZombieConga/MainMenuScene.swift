@@ -10,7 +10,7 @@ import Foundation
 import SpriteKit
 
 class MainMenuScene: SKScene {
-
+  
   override init(size: CGSize) {
     super.init(size: size)
   }
@@ -26,11 +26,13 @@ class MainMenuScene: SKScene {
     self.addChild(background)
   }
 
-  #if os(iOS)
+  #if os(iOS) || os(tvOS)
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
       sceneTapped()
     }
-  #else
+  #endif
+  
+  #if os(OSX)
     override func mouseDown(theEvent: NSEvent) {
       sceneTapped()
     }
