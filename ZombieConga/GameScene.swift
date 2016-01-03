@@ -89,7 +89,6 @@ class GameScene: SKScene {
   override func didMoveToView(view: SKView) {
     playBackgroundMusic("Sounds/backgroundMusic.mp3")
     backgroundColor = SKColor.whiteColor()
-    //background.zPosition = -1
     addChild(cameraNode)
     camera = cameraNode
     setCameraPosition(CGPoint(x: size.width/2, y: size.height/2))
@@ -119,13 +118,17 @@ class GameScene: SKScene {
   }
   
   override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-    let touch = touches.first as UITouch!
+    guard let touch = touches.first else {
+      return
+    }
     let touchLocation = touch.locationInNode(self)
     sceneTouched(touchLocation)
   }
   
   override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
-    let touch = touches.first as UITouch!
+    guard let touch = touches.first else {
+      return
+    }
     let touchLocation = touch.locationInNode(self)
     sceneTouched(touchLocation)
   }
@@ -146,7 +149,6 @@ class GameScene: SKScene {
     //checkCollision()
     moveTrain()
     moveCamera()
-    //cameraNode.position = zombie.position
   
     if lives <= 0 && !gameOver {
       gameOver = true
