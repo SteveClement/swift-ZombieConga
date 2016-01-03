@@ -226,7 +226,7 @@ class GameScene: SKScene {
     enemy.position = CGPoint(x: CGRectGetMaxX(cameraRect) + enemy.size.width/2, y: CGFloat.random(min: CGRectGetMinY(cameraRect) + enemy.size.height/2, max: CGRectGetMaxY(cameraRect) - enemy.size.height/2))
     enemy.zPosition = 50
     addChild(enemy)
-    let actionMove = SKAction.moveToX(-enemy.size.width/2, duration: 1.0)
+    let actionMove = SKAction.moveByX(-size.width-enemy.size.width*2, y:0, duration: 2.0)
     let actionRemove = SKAction.removeFromParent()
     enemy.runAction(SKAction.sequence([actionMove, actionRemove]))
   }
