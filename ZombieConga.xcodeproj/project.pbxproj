@@ -28,6 +28,7 @@
 /* Begin PBXFileReference section */
 		AA09EE611C256705005E5ABB /* MainMenuScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuScene.swift; sourceTree = "<group>"; };
 		AA480CCC1C23F73F009F4DD2 /* GameOverScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverScene.swift; sourceTree = "<group>"; };
+		AA8E58921C393E800077A24B /* GLIMSTIC.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = GLIMSTIC.TTF; sourceTree = "<group>"; };
 		AAE30C881BB47CB000215941 /* ZombieConga.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZombieConga.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AAE30C8B1BB47CB000215941 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AAE30C8F1BB47CB000215941 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
@@ -57,6 +58,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AA8E58931C393E870077A24B /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				AA8E58921C393E800077A24B /* GLIMSTIC.TTF */,
+			);
+			name = Fonts;
+			sourceTree = "<group>";
+		};
 		AAE30C7F1BB47CB000215941 = {
 			isa = PBXGroup;
 			children = (
@@ -76,6 +85,7 @@
 		AAE30C8A1BB47CB000215941 /* ZombieConga */ = {
 			isa = PBXGroup;
 			children = (
+				AA8E58931C393E870077A24B /* Fonts */,
 				AAED852B1BC13319009EB81F /* Sounds */,
 				AAE30CA11BB5B1C900215941 /* Images */,
 				AAE30CAC1BB5B1F000215941 /* sprites.atlas */,

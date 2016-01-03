@@ -56,7 +56,9 @@ class GameScene: SKScene {
   var cameraRect : CGRect {
     return CGRect(x: getCameraPosition().x - size.width/2 + (size.width - playableRect.width)/2, y: getCameraPosition().y - size.height/2 + (size.height - playableRect.height)/2, width: playableRect.width, height: playableRect.height)
   }
-
+  
+  let livesLabel = SKLabelNode(fontNamed: "Glimstick")
+  let catsLabel = SKLabelNode(fontNamed: "Glimstick")
 
   let debug = false
 
@@ -113,6 +115,27 @@ class GameScene: SKScene {
     // Because we have more then 1 action in our array we need to invoke a sequence, and because our sequence is in a function we use the runBlock method
     runAction(SKAction.repeatActionForever(SKAction.sequence([SKAction.runBlock(spawnEnemy), SKAction.waitForDuration(2.0)])))
     runAction(SKAction.repeatActionForever(SKAction.sequence([SKAction.runBlock(spawnCat), SKAction.waitForDuration(1.0)])))
+    
+    // Labels
+    livesLabel.text = "Lives: X"
+    livesLabel.fontColor = SKColor.blackColor()
+    livesLabel.fontSize = 100
+    livesLabel.zPosition = 100
+    livesLabel.horizontalAlignmentMode = .Left
+    livesLabel.verticalAlignmentMode = .Bottom
+    livesLabel.position = CGPoint(x: -playableRect.size.width/2 + CGFloat(20), y: -playableRect.size.height/2 + CGFloat(20) + overlapAmount()/2)
+    
+    catsLabel.text = "Cats: X"
+    catsLabel.fontColor = SKColor.blackColor()
+    catsLabel.fontSize = 100
+    catsLabel.zPosition = 100
+    catsLabel.horizontalAlignmentMode = .Right
+    catsLabel.verticalAlignmentMode = .Bottom
+    catsLabel.position = CGPoint(x: playableRect.size.width/2 - CGFloat(20), y: -playableRect.size.height/2 + CGFloat(20) + overlapAmount()/2)
+    
+    cameraNode.addChild(livesLabel)
+    cameraNode.addChild(catsLabel)
+    
     // the Playable area will only be displayed if debug is true
     debugDrawPlayableArea()
   }
@@ -353,6 +376,11 @@ class GameScene: SKScene {
       println("You win!")
       backgroundMusicPlayer.stop()
     }
+    
+    // Update labels
+    livesLabel.text = "Lives: \(lives)"
+    catsLabel.text = "Cats: \(trainCount)"
+
   }
   
   func loseCats() {
