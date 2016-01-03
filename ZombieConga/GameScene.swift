@@ -140,22 +140,33 @@ class GameScene: SKScene {
     debugDrawPlayableArea()
   }
   
-  override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-    guard let touch = touches.first else {
-      return
+  #if os(iOS)
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+      guard let touch = touches.first else {
+        return
+      }
+      let touchLocation = touch.locationInNode(self)
+      sceneTouched(touchLocation)
     }
-    let touchLocation = touch.locationInNode(self)
-    sceneTouched(touchLocation)
-  }
-  
-  override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
-    guard let touch = touches.first else {
+    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
+      guard let touch = touches.first else {
       return
+      }
+      let touchLocation = touch.locationInNode(self)
+      sceneTouched(touchLocation)
     }
-    let touchLocation = touch.locationInNode(self)
-    sceneTouched(touchLocation)
-  }
+  #else
+    override func mouseDown(theEvent: NSEvent) {
+      let touchLocation = theEvent.locationInNode(self)
+      sceneTouched(touchLocation)
+    }
   
+    override func mouseDragged(theEvent: NSEvent) {
+      let touchLocation = theEvent.locationInNode(self)
+      sceneTouched(touchLocation)
+    }
+  #endif
+
   override func update(currentTime: CFTimeInterval) {
     if lastUpdateTime > 0 {
       dt = currentTime - lastUpdateTime
