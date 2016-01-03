@@ -19,6 +19,7 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 * THE SOFTWARE.
 */
+
 //
 //  GameScene.swift
 //  ZombieConga
@@ -74,10 +75,12 @@ class GameScene: SKScene {
     zombieAnimation = SKAction.animateWithTextures(textures, timePerFrame: 0.1)
     super.init(size: size)
   }
+  
   // Why is this needed again?
   required init(coder aDecode: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
+  
   override func didMoveToView(view: SKView) {
     playBackgroundMusic("Sounds/backgroundMusic.mp3")
     backgroundColor = SKColor.whiteColor()
@@ -107,6 +110,7 @@ class GameScene: SKScene {
     // the Playable area will only be displayed if debug is true
     debugDrawPlayableArea()
   }
+  
   override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
     let touch = touches.first as UITouch!
     let touchLocation = touch.locationInNode(backgroundLayer)
@@ -128,17 +132,8 @@ class GameScene: SKScene {
     lastUpdateTime = currentTime
     println("\(dt*1000) ms since last update")
 
-    if let _ = lastTouchLocation {
-      // let diff = lastTouch - zombie.position
-      /* if (diff.length() <= zombieMovePointPerSec * CGFloat(dt)) {
-        zombie.position = lastTouchLocation!
-        velocity = CGPointZero
-        stopZombieAnimation()
-      } else { */
-      moveSprite(zombie, velocity: velocity)
-      rotateSprite(zombie, direction: velocity, rotateRadiansPerSec: zombieRotateRadiansPerSec)
-      // }
-    }
+    moveSprite(zombie, velocity: velocity)
+    rotateSprite(zombie, direction: velocity, rotateRadiansPerSec: zombieRotateRadiansPerSec)
 
     boundsCheckZombie()
     //checkCollision()
@@ -225,14 +220,17 @@ class GameScene: SKScene {
     let actionRemove = SKAction.removeFromParent()
     enemy.runAction(SKAction.sequence([actionMove, actionRemove]))
   }
+  
   func startZombieAnimation() {
     if zombie.actionForKey("animation") == nil {
       zombie.runAction(SKAction.repeatActionForever(zombieAnimation), withKey: "animation")
     }
   }
+  
   func stopZombieAnimation() {
     zombie.removeActionForKey("animation")
   }
+  
   func spawnCat() {
     let cat = SKSpriteNode(imageNamed: "cat")
     cat.name = "cat"
@@ -367,13 +365,14 @@ class GameScene: SKScene {
       if loseCount >= 2 {
         stop.memory = true
       }
-  }
+    }
   }
   
   func backgroundNode() -> SKSpriteNode {
     let backgroundNode = SKSpriteNode()
     backgroundNode.anchorPoint = CGPointZero
     backgroundNode.name = "background"
+    
     let background1 = SKSpriteNode(imageNamed: "background1")
     background1.anchorPoint = CGPointZero
     background1.position = CGPoint(x: 0, y: 0)
@@ -409,6 +408,7 @@ class GameScene: SKScene {
       print("\(content)")
     }
   }
+
   func debugDrawPlayableArea() {
     if !debug {
       return

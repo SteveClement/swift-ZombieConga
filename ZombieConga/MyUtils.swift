@@ -41,14 +41,17 @@ import AVFoundation
 func + (left: CGPoint, right: CGPoint) -> CGPoint {
   return CGPoint(x: left.x + right.x, y: left.y + right.y)
 }
+
 // Add CGPoint operations to the +=_operator
 func += (inout left: CGPoint, right: CGPoint) {
   left = left + right
 }
+
 // Add CGPoint operations to the -_operator
 func - (left: CGPoint, right: CGPoint) -> CGPoint {
   return CGPoint(x: left.x - right.x, y: left.y - right.y)
 }
+
 // Add CGPoint operations to the +_operator
 func -= (inout left: CGPoint, right: CGPoint) {
   left = left - right
@@ -57,27 +60,35 @@ func -= (inout left: CGPoint, right: CGPoint) {
 func * (left: CGPoint, right: CGPoint) -> CGPoint {
   return CGPoint(x: left.x * right.x, y: left.y * left.x)
 }
+
 func *= (inout left: CGPoint, right: CGPoint) {
   left = left * right
 }
+
 func * (point: CGPoint, scalar: CGFloat) -> CGPoint {
   return CGPoint(x: point.x * scalar, y: point.y * scalar)
 }
+
 func *= (inout point: CGPoint, scalar: CGFloat) {
   point = point * scalar
 }
+
 func / (left: CGPoint, right: CGPoint) -> CGPoint {
   return CGPoint(x: left.x / right.x, y: left.y / left.x)
 }
+
 func /= (inout left: CGPoint, right: CGPoint) {
   left = left / right
 }
+
 func / (point: CGPoint, scalar: CGFloat) -> CGPoint {
   return CGPoint(x: point.x / scalar, y: point.y / scalar)
 }
+
 func /= (inout point: CGPoint, scalar: CGFloat) {
   point = point / scalar
 }
+
 // This only gets considered if we are NOT (!) running on a 64bit Platform
 #if !(arch(x86_64) || arch(arm64))
   func atan2(y: CGFloat, x: CGFloat) -> CGFloat {

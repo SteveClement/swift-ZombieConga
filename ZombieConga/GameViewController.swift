@@ -41,7 +41,7 @@ class GameViewController: UIViewController {
     skView.showsNodeCount = true
     skView.ignoresSiblingOrder = true
     skView.presentScene(scene)
-}
+  }
 
   override func shouldAutorotate() -> Bool {
       return true
