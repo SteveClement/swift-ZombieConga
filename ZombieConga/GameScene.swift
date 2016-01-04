@@ -53,6 +53,7 @@ class GameScene: SKScene {
   var lives = 5
   var gameOver = false
   let touchBox = SKSpriteNode(color: SKColor.redColor(), size: CGSize(width: 100, height: 100))
+  var priorTouch: CGPoint = CGPointZero
   
   var cameraRect : CGRect {
     return CGRect(x: getCameraPosition().x - size.width/2 + (size.width - playableRect.width)/2, y: getCameraPosition().y - size.height/2 + (size.height - playableRect.height)/2, width: playableRect.width, height: playableRect.height)
@@ -144,7 +145,7 @@ class GameScene: SKScene {
     debugTouchBox()
   }
   
-  #if os(iOS) || os(tvOS)
+  #if os(iOS)
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
       guard let touch = touches.first else {
         return
@@ -162,6 +163,29 @@ class GameScene: SKScene {
       touchBox.position = touchLocation
       sceneTouched(touchLocation)
     }
+  #endif
+
+  #if os(tvOS)
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+      guard let touch = touches.first else {
+        return
+      }
+      let touchLocation = touch.locationInNode(self)
+      touchBox.position = touchLocation
+      priorTouch = touchLocation
+    }
+  
+  override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    guard let touch = touches.first else {
+      return
+    }
+    let touchLocation = touch.locationInNode(self)
+    let offset = touchLocation - priorTouch
+    let direction = offset.normalized()
+    velocity = direction * zombieMovePointPerSec
+    priorTouch = (priorTouch * 0.75) + (touchLocation * 0.25)
+    touchBox.position = zombie.position + (direction*200)
+  }
   #endif
   
   #if os(OSX)
