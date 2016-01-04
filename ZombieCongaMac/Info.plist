@@ -32,9 +32,7 @@
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
-	<key>UIAppFonts</key>
-	<array>
-		<string>GLIMSTIC.TTF</string>
-	</array>
+	<key>ATSApplicationFontsPath</key>
+	<string>Fonts</string>
 </dict>
 </plist>

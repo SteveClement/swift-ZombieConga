@@ -52,6 +52,7 @@ class GameScene: SKScene {
   let cameraMovePointsPerSec: CGFloat = 200.0
   var lives = 5
   var gameOver = false
+  let touchBox = SKSpriteNode(color: SKColor.redColor(), size: CGSize(width: 100, height: 100))
   
   var cameraRect : CGRect {
     return CGRect(x: getCameraPosition().x - size.width/2 + (size.width - playableRect.width)/2, y: getCameraPosition().y - size.height/2 + (size.height - playableRect.height)/2, width: playableRect.width, height: playableRect.height)
@@ -138,6 +139,9 @@ class GameScene: SKScene {
     
     // the Playable area will only be displayed if debug is true
     debugDrawPlayableArea()
+    
+    // a touch box for tvOS
+    debugTouchBox()
   }
   
   #if os(iOS) || os(tvOS)
@@ -146,13 +150,16 @@ class GameScene: SKScene {
         return
       }
       let touchLocation = touch.locationInNode(self)
+      touchBox.position = touchLocation
       sceneTouched(touchLocation)
     }
+  
     override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
       guard let touch = touches.first else {
       return
       }
       let touchLocation = touch.locationInNode(self)
+      touchBox.position = touchLocation
       sceneTouched(touchLocation)
     }
   #endif
@@ -487,5 +494,14 @@ class GameScene: SKScene {
     shape.strokeColor = SKColor.redColor()
     shape.lineWidth = 12.0
     addChild(shape)
+  }
+  
+  func debugTouchBox() {
+    if !debug {
+      return
+    }
+    print("\(size)")
+    touchBox.zPosition = 1000
+    addChild(touchBox)
   }
 }
