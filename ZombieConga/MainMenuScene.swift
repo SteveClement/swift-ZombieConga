@@ -30,12 +30,18 @@ class MainMenuScene: SKScene {
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
       sceneTapped()
     }
-  #endif
-  
-  #if os(OSX)
+  #elseif os(OSX)
     override func mouseDown(theEvent: NSEvent) {
       sceneTapped()
     }
+  #else
+  // As of 2016-01-04 os() can return: OSX, iOS, watchOS, tvOS [Src: https://developer.apple.com/library/ios/documentation/Swift/Conceptual/BuildingCocoaApps/InteractingWithCAPIs.html]
+  override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    print("uh-oh I will not be able to handle input events :( ")
+  }
+  override func mouseDown(theEvent: NSEvent) {
+    print("uh-oh I will not be able to handle input events :( ")
+  }
   #endif
 
   func sceneTapped() {

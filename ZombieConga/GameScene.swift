@@ -163,9 +163,7 @@ class GameScene: SKScene {
       touchBox.position = touchLocation
       sceneTouched(touchLocation)
     }
-  #endif
-
-  #if os(tvOS)
+  #elseif os(tvOS)
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
       guard let touch = touches.first else {
         return
@@ -186,9 +184,7 @@ class GameScene: SKScene {
     priorTouch = (priorTouch * 0.75) + (touchLocation * 0.25)
     touchBox.position = zombie.position + (direction*200)
   }
-  #endif
-  
-  #if os(OSX)
+  #elseif os(OSX)
     override func mouseDown(theEvent: NSEvent) {
       let touchLocation = theEvent.locationInNode(self)
       sceneTouched(touchLocation)
@@ -198,6 +194,23 @@ class GameScene: SKScene {
       let touchLocation = theEvent.locationInNode(self)
       sceneTouched(touchLocation)
     }
+  #else
+  // As of 2016-01-04 os() can return: OSX, iOS, watchOS, tvOS [Src: https://developer.apple.com/library/ios/documentation/Swift/Conceptual/BuildingCocoaApps/InteractingWithCAPIs.html]
+  override func mouseDown(theEvent: NSEvent) {
+    print("uh-oh I will not be able to handle input events :( ")
+  }
+  
+  override func mouseDragged(theEvent: NSEvent) {
+    print("uh-oh I will not be able to handle input events :(")
+  }
+  
+  override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    print("uh-oh I will not be able to handle input events :(")
+  }
+  
+  override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    print("uh-oh I will not be able to handle input events :(")
+  }
   #endif
 
   override func update(currentTime: CFTimeInterval) {
