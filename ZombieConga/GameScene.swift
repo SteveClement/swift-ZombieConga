@@ -56,7 +56,9 @@ class GameScene: SKScene {
   var priorTouch: CGPoint = CGPoint.zero
   
   var cameraRect : CGRect {
-    return CGRect(x: getCameraPosition().x - size.width/2 + (size.width - playableRect.width)/2, y: getCameraPosition().y - size.height/2 + (size.height - playableRect.height)/2, width: playableRect.width, height: playableRect.height)
+    let x = getCameraPosition().x - size.width/2 + (size.width - playableRect.width)/2
+    let y = getCameraPosition().y - size.height/2 + (size.height - playableRect.height)/2
+    return CGRect(x: x, y: y, width: playableRect.width, height: playableRect.height)
   }
   
   let livesLabel = SKLabelNode(fontNamed: "Glimstick")
