@@ -19,7 +19,7 @@ class MainMenuScene: SKScene {
     fatalError("init(coder:) has not been implemented")
   }
 
-  override func didMoveToView(view: SKView) {
+  override func didMove(to view: SKView) {
     var background: SKSpriteNode
     background = SKSpriteNode(imageNamed: "MainMenu")
     background.position = CGPoint(x: self.size.width/2, y: self.size.height/2)
@@ -27,7 +27,7 @@ class MainMenuScene: SKScene {
   }
 
   #if os(iOS) || os(tvOS)
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
       sceneTapped()
     }
   #elseif os(OSX)
@@ -47,7 +47,7 @@ class MainMenuScene: SKScene {
   func sceneTapped() {
     let myScene = GameScene(size: self.size)
     myScene.scaleMode = self.scaleMode
-    let reveal = SKTransition.doorwayWithDuration(1.5)
+    let reveal = SKTransition.doorway(withDuration: 1.5)
     self.view?.presentScene(myScene, transition: reveal)
     }
 }

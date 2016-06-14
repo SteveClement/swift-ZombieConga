@@ -35,7 +35,7 @@ class GameViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     let scene = MainMenuScene(size:CGSize(width: 2048, height: 1536))
-    scene.scaleMode = .AspectFill
+    scene.scaleMode = .aspectFill
     let skView = self.view as! SKView
     skView.showsFPS = true
     skView.showsNodeCount = true
@@ -48,10 +48,10 @@ class GameViewController: UIViewController {
   }
 
   override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-      if UIDevice.currentDevice().userInterfaceIdiom == .Phone {
-          return .AllButUpsideDown
+      if UIDevice.current().userInterfaceIdiom == .phone {
+          return .allButUpsideDown
       } else {
-          return .All
+          return .all
       }
   }
 
