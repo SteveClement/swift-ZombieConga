@@ -187,13 +187,13 @@ class GameScene: SKScene {
     touchBox.position = zombie.position + (direction*200)
   }
   #elseif os(OSX)
-    override func mouseDown(theEvent: NSEvent) {
-      let touchLocation = theEvent.locationInNode(self)
+    override func mouseDown(with theEvent: NSEvent) {
+      let touchLocation = theEvent.location(in: self)
       sceneTouched(touchLocation)
     }
   
-    override func mouseDragged(theEvent: NSEvent) {
-      let touchLocation = theEvent.locationInNode(self)
+    override func mouseDragged(with theEvent: NSEvent) {
+      let touchLocation = theEvent.location(in: self)
       sceneTouched(touchLocation)
     }
   #else

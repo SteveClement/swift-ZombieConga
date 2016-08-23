@@ -31,7 +31,7 @@ class MainMenuScene: SKScene {
       sceneTapped()
     }
   #elseif os(OSX)
-    override func mouseDown(theEvent: NSEvent) {
+    override func mouseDown(with theEvent: NSEvent) {
       sceneTapped()
     }
   #else

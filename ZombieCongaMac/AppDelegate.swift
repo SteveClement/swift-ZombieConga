@@ -19,14 +19,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(aNotification: NSNotification) {
         /* Pick a size for the scene */
       let scene = MainMenuScene(size: CGSize(width: 2048, height: 1536))
-      scene.scaleMode = .AspectFill
+      scene.scaleMode = .aspectFill
       self.skView!.presentScene(scene)
       self.skView!.ignoresSiblingOrder = true
       self.skView!.showsFPS = true
       self.skView!.showsNodeCount = true
     }
     
-    func applicationShouldTerminateAfterLastWindowClosed(sender: NSApplication) -> Bool {
+    private func applicationShouldTerminateAfterLastWindowClosed(sender: NSApplication) -> Bool {
         return true
     }
 }
