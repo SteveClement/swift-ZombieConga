@@ -52,7 +52,7 @@ class GameScene: SKScene {
   let cameraMovePointsPerSec: CGFloat = 200.0
   var lives = 5
   var gameOver = false
-  let touchBox = SKSpriteNode(color: SKColor.red(), size: CGSize(width: 100, height: 100))
+  let touchBox = SKSpriteNode(color: SKColor.red, size: CGSize(width: 100, height: 100))
   var priorTouch: CGPoint = CGPoint.zero
   
   var cameraRect : CGRect {
@@ -94,7 +94,7 @@ class GameScene: SKScene {
   
   override func didMove(to view: SKView) {
     playBackgroundMusic("Sounds/backgroundMusic.mp3")
-    backgroundColor = SKColor.white()
+    backgroundColor = SKColor.white
     addChild(cameraNode)
     camera = cameraNode
     setCameraPosition(CGPoint(x: size.width/2, y: size.height/2))
@@ -122,7 +122,7 @@ class GameScene: SKScene {
     
     // Labels
     livesLabel.text = "Lives: X"
-    livesLabel.fontColor = SKColor.black()
+    livesLabel.fontColor = SKColor.black
     livesLabel.fontSize = 100
     livesLabel.zPosition = 100
     livesLabel.horizontalAlignmentMode = .left
@@ -130,7 +130,7 @@ class GameScene: SKScene {
     livesLabel.position = CGPoint(x: -playableRect.size.width/2 + CGFloat(20), y: -playableRect.size.height/2 + CGFloat(20) + overlapAmount()/2)
     
     catsLabel.text = "Cats: X"
-    catsLabel.fontColor = SKColor.black()
+    catsLabel.fontColor = SKColor.black
     catsLabel.fontSize = 100
     catsLabel.zPosition = 100
     catsLabel.horizontalAlignmentMode = .right
@@ -222,7 +222,7 @@ class GameScene: SKScene {
       dt = 0
     }
     lastUpdateTime = currentTime
-    println("\(dt*1000) ms since last update")
+    //println("\(dt*1000) ms since last update")
 
     moveSprite(zombie, velocity: velocity)
     rotateSprite(zombie, direction: velocity, rotateRadiansPerSec: zombieRotateRadiansPerSec)
@@ -250,7 +250,7 @@ class GameScene: SKScene {
   // User Functions
   func moveSprite(_ sprite: SKSpriteNode, velocity: CGPoint) {
     let amountToMove = velocity * CGFloat(dt)
-    println("Amount to move: \(amountToMove)")
+    //println("Amount to move: \(amountToMove)")
     sprite.position += amountToMove
   }
   
@@ -354,7 +354,7 @@ class GameScene: SKScene {
     cat.removeAllActions()
     cat.setScale(1.0)
     cat.zRotation = 0
-    let turnGreen = SKAction.colorize(with: SKColor.green(), colorBlendFactor: 1.0, duration: 0.2)
+    let turnGreen = SKAction.colorize(with: SKColor.green, colorBlendFactor: 1.0, duration: 0.2)
     cat.run(turnGreen)
   }
   
@@ -527,9 +527,9 @@ class GameScene: SKScene {
     print("\(size)")
     let shape = SKShapeNode()
     let path = CGMutablePath()
-    path.addRect(nil, rect: playableRect)
+    path.addRect(playableRect)
     shape.path = path
-    shape.strokeColor = SKColor.red()
+    shape.strokeColor = SKColor.red
     shape.lineWidth = 12.0
     addChild(shape)
   }

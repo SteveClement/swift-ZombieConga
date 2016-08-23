@@ -144,7 +144,7 @@ extension CGFloat {
 var backgroundMusicPlayer: AVAudioPlayer!
 
 func playBackgroundMusic(_ filename: String) {
-  let resourceUrl = Bundle.main.urlForResource(filename, withExtension: nil)
+  let resourceUrl = Bundle.main.url(forResource: filename, withExtension: nil)
   guard let url = resourceUrl else {
     print("Couldn't find file: \(filename)")
     return
