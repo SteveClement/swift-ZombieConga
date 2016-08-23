@@ -166,20 +166,20 @@ class GameScene: SKScene {
       sceneTouched(touchLocation)
     }
   #elseif os(tvOS)
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
       guard let touch = touches.first else {
         return
       }
-      let touchLocation = touch.locationInNode(self)
+      let touchLocation = touch.location(in: self)
       touchBox.position = touchLocation
       priorTouch = touchLocation
     }
   
-  override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
+  override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
     guard let touch = touches.first else {
       return
     }
-    let touchLocation = touch.locationInNode(self)
+    let touchLocation = touch.location(in: self)
     let offset = touchLocation - priorTouch
     let direction = offset.normalized()
     velocity = direction * zombieMovePointPerSec

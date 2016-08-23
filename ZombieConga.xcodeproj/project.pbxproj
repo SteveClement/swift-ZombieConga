@@ -280,6 +280,7 @@
 					AA945FAA1C39513900DAC6D6 = {
 						CreatedOnToolsVersion = 7.2;
 						DevelopmentTeam = 9D35K98X7P;
+						LastSwiftMigration = 0800;
 					};
 					AAE30C871BB47CB000215941 = {
 						CreatedOnToolsVersion = 7.1;
@@ -487,6 +488,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = appletvos;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 9.0;
 			};
@@ -506,6 +508,7 @@
 				PROVISIONING_PROFILE = "";
 				SDKROOT = appletvos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 9.0;
 			};
