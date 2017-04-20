@@ -111,7 +111,7 @@ extension CGPoint {
     return atan2(y, x)
   }
 }
-let π = CGFloat(M_PI)
+let π = CGFloat(Double.pi)
 
 func shortestAngleBetween(_ angle1: CGFloat, angle2: CGFloat) -> CGFloat {
   let twoπ = π * 2.0
